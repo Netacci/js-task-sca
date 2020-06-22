@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const people = [
+        {
+          firstName: "Sam",
+          lastName: "Hughes",
+          DOB: "07/07/1978",
+          department: "Development",
+          salary: "45000",
+        },
+        {
+          firstName: "Terri",
+          lastName: "Bishop",
+          DOB: "07/04/1989",
+          department: "Development",
+          salary: "35000",
+        },
+        {
+          firstName: "Jar",
+          lastName: "Burke",
+          DOB: "11/01/1985",
+          department: "Marketing",
+          salary: "38000",
+        },
+        {
+          firstName: "Julio",
+          lastName: "Miller",
+          DOB: "12/02/1991",
+          department: "Sales",
+          salary: "40000",
+        },
+        {
+          firstName: "Chester",
+          lastName: "Flores",
+          DOB: "15/03/1988",
+          department: "Development",
+          salary: "41000",
+        },
+        {
+          firstName: "Madison",
+          lastName: "Marshall",
+          DOB: "22/09/1980",
+          department: "Sales",
+          salary: "32000",
+        },
+        {
+          firstName: "Gabriella",
+          lastName: "Steward",
+          DOB: "26/08/1994",
+          department: "Marketing",
+          salary: "46000",
+        },
+        {
+          firstName: "Ava",
+          lastName: "Pena",
+          DOB: "02/11/1986",
+          department: "Office Management",
+          salary: "38000",
+        },
+      ];
+      // 1. What is the average salary?
+      // Create an empty array
+      let totalSalary = [];
+      // loop through the object to get the value of all salary and push to the empty array
+      people.forEach((person) => {
+        let salary = person.salary;
+        totalSalary.push(salary);
+      });
+      // Convert string of salary to number(stackoverflow came to the rescue here)
+      let total = totalSalary.map((i) => Number(i));
+      // Use reduce method to add numbers in the array and store as sum
+
+      let sum = total.reduce((acc, item) => acc + item, 0);
+      let averageSalary = sum / people.length;
+      console.log(averageSalary);
+
+      // 2. Which people are currently older than 30?
+      let above30Name = [];
+      people.forEach((person) => {
+        let DOB = person.DOB;
+        // This gets out a substring
+        let year = DOB.substr(6, 4);
+        // converts the string to number
+        let yrNum = Number(year);
+        //  get present year
+        let d = new Date();
+        let presentYear = d.getFullYear();
+        // checks if the number is greater than 30 when subtracted from present year
+        if (presentYear - yrNum > 30) {
+          // gets the name of those that meet the condition
+          Name = `${person.firstName}  ${person.lastName}`;
+          // pushes it to the array
+          above30Name.push(Name);
+        }
+      });
+      console.log(above30Name);
+      console.log(`The people above 30 are ${above30Name}`);
+      // Tried solving with Map
+      let totname = people.map((person) => {
+        let DOB = person.DOB;
+        let year = DOB.substr(6, 4);
+        let yrNum = Number(year);
+        let d = new Date();
+        let presentYear = d.getFullYear();
+        if (presentYear - yrNum > 30) {
+          Name = `${person.firstName}  ${person.lastName}`;
+          return Name;
+        }
+      });
+      // It worked too but it returned the people less than 30 as undefined
+      console.log(totname);
+      console.log(`The people above 30 are ${totname}`);
+
+      // 3. Get a list of people's full names(firstName and lastName)
+      people.forEach((person) => {
+        console.log(`${person.firstName} ${person.lastName}`);
+      });
+      // 5. How many people are in each department
+      // I realy tried to shorten this code and could not figure it out yet.
+
+      let depts = people.filter((dept) => {
+        let departments = dept.department;
+        if (departments === "Development") {
+          return departments.length;
+        }
+      });
+      console.log(`Development department has ${depts.length} people `);
+      let marketdepts = people.filter((dept) => {
+        let departments = dept.department;
+        if (departments === "Marketing") {
+          return departments.length;
+        }
+      });
+      console.log(`Marketing department has ${marketdepts.length} people `);
+      let salesdepts = people.filter((dept) => {
+        let departments = dept.department;
+        if (departments === "Sales") {
+          return departments.length;
+        }
+      });
+      console.log(`Sales department has ${salesdepts.length} people `);
+      let officedepts = people.filter((dept) => {
+        let departments = dept.department;
+        if (departments === "Office Management") {
+          return departments.length;
+        }
+      });
+      console.log(
+        `Office management department has ${officedepts.length} people `
+      );
+
+      // 4. Get a list of the people in the array ordered from youngest to oldest
+      // I really tried to return their names but couldnt figure that out too
+
+      let agename = people.map((person, DOB, year, yrNum) => {
+        DOB = person.DOB;
+        year = DOB.substr(6, 4);
+        yrNum = Number(year);
+        let age = 2020 - yrNum;
+        return age;
+      });
+      console.log(agename);
+      let sortedAge = agename.slice().sort((a, b) => a - b);
+      console.log(sortedAge);
+
+      // let allAge = people.map((person) => {
+      // let sortedAges = agename.sort((a, b)=> a -b);
+
+      //   let Nameage = `${person.firstName}  ${person.lastName}`;
+      // });
+
+      // console.log(allAge);
+      // let agat = [];
+      // people.forEach((person) => {
+      //   let DOB = person.DOB;
+      //   let year = DOB.substr(6, 4);
+      //   let yrNum = Number(year);
+      //   let d = new Date();
+      //   let presentYear = d.getFullYear();
+      //   let age = presentYear - yrNum;
+      //   agat.push(age);
+      // });
+      // console.log(agat);
+      // let ago = agat.sort((a, b) => {
+      //   return ();
+      // });
+      // console.log(ago);
+
+      // let allage = people.map((person) => {
+      //   agename.slice().sort((a, b) =>(Nameage = `age: ${a - b} name: ${person.firstName}  ${person.lastName}`)
+      //     );
+
+      //   // Nameage = `${person.firstName}  ${person.lastName}`;
+      //   return Nameage;
+      // });
+      // console.log(allage);
+
+      // console.log(agename);
+      // let sortedAges = agename.sort();
+      // console.log(sortedAges);
+
+      // people.forEach((person) => {
+      //   let DOB = person.DOB;
+      //   let year = DOB.substr(6, 4);
+      //   let yrNum = Number(year);
+      //   let age = 2020 - yrNum;
+      //   console.log(age)
+      // });
+      // let youngToOld = `${person.firstName}  ${person.lastName}`;
+      // console.log(youngToOld);
+      // let dept = [];
+      // let devdept, markdept, salesdept, officedept;
+      // for (let i = 0; i < people.length; i++) {
+      //   if (people.department === "Development") {
+      //     devdept = 1;
+      //   } else if (people.department === "Marketing") {
+      //     markdept = 1;
+      //   } else if (people.department === "Sales") {
+      //     salesdept = 1;
+      //   } else if (people.department === "Office Management") {
+      //     officedept = 1;
+      //   }
+      // }
+      // let alldept = [];
+      // people.forEach((dept) => {
+      //   let depts = people.filter((dept) => {
+      //     let departments = dept.department;
+      //     if (
+      //       departments === "Development" &&
+      //       departments === "Marketing" &&
+      //       departments === "Sales" &&
+      //       departments === "Office Management"
+      //     ) {
+      //       return departments.length;
+      //     }
+      //   });
+      //   alldept.push(depts);
+      // });
+      // console.log(alldept);
+      // let depts = people.filter((dept) => {
+      //   let departments = dept.department;
+      //   if (
+      //     departments === "Development" &&
+      //     departments === "Marketing" &&
+      //     departments === "Sales" &&
+      //     departments === "Office Management"
+      //   ) {
+      //     return departments.length;
+      //   }
+      // });
+      // console.log(depts.length);
+    </script>
+  </body>
+</html>
