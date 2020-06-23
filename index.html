@@ -79,7 +79,7 @@
 
       let sum = total.reduce((acc, item) => acc + item, 0);
       let averageSalary = sum / people.length;
-      console.log(averageSalary);
+      console.log(`Their average salary is ${averageSalary}`);
 
       // 2. Which people are currently older than 30?
       let above30Name = [];
@@ -102,26 +102,40 @@
       });
       console.log(above30Name);
       console.log(`The people above 30 are ${above30Name}`);
-      // Tried solving with Map
-      let totname = people.map((person) => {
-        let DOB = person.DOB;
-        let year = DOB.substr(6, 4);
-        let yrNum = Number(year);
-        let d = new Date();
-        let presentYear = d.getFullYear();
-        if (presentYear - yrNum > 30) {
-          Name = `${person.firstName}  ${person.lastName}`;
-          return Name;
-        }
-      });
-      // It worked too but it returned the people less than 30 as undefined
-      console.log(totname);
-      console.log(`The people above 30 are ${totname}`);
+      // // Tried solving with Map
+      // let totname = people.map((person) => {
+      //   let DOB = person.DOB;
+      //   let year = DOB.substr(6, 4);
+      //   let yrNum = Number(year);
+      //   let d = new Date();
+      //   let presentYear = d.getFullYear();
+      //   if (presentYear - yrNum > 30) {
+      //     Name = `${person.firstName}  ${person.lastName}`;
+      //     return Name;
+      //   }
+      // });
+      // // It worked too but it returned the people less than 30 as undefined
+      // console.log(`The people above 30 are ${totname}`);
 
       // 3. Get a list of people's full names(firstName and lastName)
       people.forEach((person) => {
         console.log(`${person.firstName} ${person.lastName}`);
       });
+
+      // 4. Get a list of the people in the array ordered from youngest to oldest
+      // I really tried to return their names but couldnt figure that out too
+
+      people.sort((a, b) => {
+        // parseint converts to integer
+        let r = 2020 - parseInt(a.DOB.substr(6, 4));
+        let s = 2020 - parseInt(b.DOB.substr(6, 4));
+        return r - s;
+      });
+      let sortedlist = people.map((age) => {
+        return `${age.firstName} ${age.lastName}`;
+      });
+      console.log(sortedlist);
+
       // 5. How many people are in each department
       // I realy tried to shorten this code and could not figure it out yet.
 
@@ -156,65 +170,19 @@
         `Office management department has ${officedepts.length} people `
       );
 
-      // 4. Get a list of the people in the array ordered from youngest to oldest
-      // I really tried to return their names but couldnt figure that out too
-
-      let agename = people.map((person, DOB, year, yrNum) => {
-        DOB = person.DOB;
-        year = DOB.substr(6, 4);
-        yrNum = Number(year);
-        let age = 2020 - yrNum;
-        return age;
-      });
-      console.log(agename);
-      let sortedAge = agename.slice().sort((a, b) => a - b);
-      console.log(sortedAge);
-
-      // let allAge = people.map((person) => {
-      // let sortedAges = agename.sort((a, b)=> a -b);
-
-      //   let Nameage = `${person.firstName}  ${person.lastName}`;
-      // });
-
-      // console.log(allAge);
-      // let agat = [];
-      // people.forEach((person) => {
-      //   let DOB = person.DOB;
-      //   let year = DOB.substr(6, 4);
-      //   let yrNum = Number(year);
-      //   let d = new Date();
-      //   let presentYear = d.getFullYear();
-      //   let age = presentYear - yrNum;
-      //   agat.push(age);
-      // });
-      // console.log(agat);
-      // let ago = agat.sort((a, b) => {
-      //   return ();
-      // });
-      // console.log(ago);
-
-      // let allage = people.map((person) => {
-      //   agename.slice().sort((a, b) =>(Nameage = `age: ${a - b} name: ${person.firstName}  ${person.lastName}`)
-      //     );
-
-      //   // Nameage = `${person.firstName}  ${person.lastName}`;
-      //   return Nameage;
-      // });
-      // console.log(allage);
-
-      // console.log(agename);
-      // let sortedAges = agename.sort();
-      // console.log(sortedAges);
-
-      // people.forEach((person) => {
-      //   let DOB = person.DOB;
-      //   let year = DOB.substr(6, 4);
-      //   let yrNum = Number(year);
+      // let agename = people.map((person, DOB, year, yrNum) => {
+      //   DOB = person.DOB;
+      //   year = DOB.substr(6, 4);
+      //   yrNum = Number(year);
       //   let age = 2020 - yrNum;
-      //   console.log(age)
+      //   return age;
       // });
-      // let youngToOld = `${person.firstName}  ${person.lastName}`;
-      // console.log(youngToOld);
+      // console.log(agename);
+      // let sortedAge = agename.sort((a, b) => {
+      //   a - b;
+      // });
+      // console.log(sortedAge);
+
       // let dept = [];
       // let devdept, markdept, salesdept, officedept;
       // for (let i = 0; i < people.length; i++) {
